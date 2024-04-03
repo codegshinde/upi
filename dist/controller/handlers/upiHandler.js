@@ -13,12 +13,12 @@ const _upiRouteSchema = require("../schemas/upiRouteSchema");
 async function upiHandler(request, reply) {
     try {
         const body = request.body;
-        const transaction = await _Transaction.Transaction.findOne({
-            title: body.title
-        });
-        if (transaction) {
-            throw new Error("Transaction Already Inserted!");
-        }
+        // const transaction = await Transaction.findOne({
+        //   title: body.title,
+        // });
+        // if (transaction) {
+        //   throw new Error("Transaction Already Inserted!");
+        // }
         const newTransaction = new _Transaction.Transaction(body);
         await newTransaction.save();
         reply.send({
