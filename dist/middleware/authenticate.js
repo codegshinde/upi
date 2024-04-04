@@ -25,6 +25,7 @@ function _interop_require_default(obj) {
     const publicRoutes = [
         "/login",
         "/register",
+        "/upi",
         "/upi/create",
         "/upi/update"
     ];

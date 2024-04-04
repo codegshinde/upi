@@ -14,22 +14,8 @@ const _regexMatcher = require("../../utils/regexMatcher");
 const _upiRouteSchema = require("../schemas/upiRouteSchema");
 async function upiHandler(request, reply) {
     try {
-        // const body = request.body as UpiRouteRequestBody;
-        // // const transaction = await Transaction.findOne({
-        // //   title: body.title,
-        // // });
-        // // if (transaction) {
-        // //   throw new Error("Transaction Already Inserted!");
-        // // }
-        // const newTransaction = new Transaction(body);
-        // await newTransaction.save();
-        // reply.send({
-        //   message: "Transaction Saved",
-        //   data: newTransaction,
-        // });
         const body = request.body;
         const uniqId = await (0, _regexMatcher.regexMatcher)(body.text);
-        console.log(uniqId);
         // Find the existing transaction
         const existingTransaction = await _UpiTransaction.UpiTransaction.findOne({
             uniqId
@@ -42,10 +28,12 @@ async function upiHandler(request, reply) {
         existingTransaction.status = "success";
         await existingTransaction.save();
         // Create a new real transaction object based on the existing transaction
-        const newRealTransaction = new _UpiTransactionReal.UpiTransactionReal(existingTransaction);
+        const newRealTransaction = new _UpiTransactionReal.UpiTransactionReal(existingTransaction.toObject());
         await newRealTransaction.save();
-        // Delete the existing transaction if needed
-        await existingTransaction.deleteOne();
+        // Delete the existing transaction from the original collection
+        await _UpiTransaction.UpiTransaction.deleteOne({
+            _id: existingTransaction._id
+        });
         // Send the response with the new real transaction
         reply.send({
             transaction: newRealTransaction

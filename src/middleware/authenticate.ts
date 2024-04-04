@@ -9,7 +9,7 @@ import fp from "fastify-plugin";
  */
 async function authenticate(fastify: FastifyInstance): Promise<void> {
   // Define public routes that do not require authentication
-  const publicRoutes = ["/login", "/register", "/upi/create", "/upi/update"];
+  const publicRoutes = ["/login", "/register", "/upi", "/upi/create", "/upi/update"];
   // Add preHandler hook to verify JWT for protected routes
   fastify.addHook("preHandler", async (request: FastifyRequest) => {
     try {
