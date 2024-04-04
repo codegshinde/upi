@@ -2,8 +2,7 @@ import { FastifyReply, FastifyRequest, RouteShorthandOptionsWithHandler } from "
 import { UpiTransaction } from "../../models/UpiTransaction";
 import { UpiTransactionReal } from "../../models/UpiTransactionReal";
 import { regexMatcher } from "../../utils/regexMatcher";
-import { UpdateUpiRequestBody } from "../schemas/updateUpiTransaction";
-import { upiRouteSchema } from "../schemas/upiRouteSchema";
+import { UpiRouteRequestBody, upiRouteSchema } from "../schemas/upiRouteSchema";
 
 async function upiHandler(request: FastifyRequest, reply: FastifyReply) {
   try {
@@ -26,8 +25,10 @@ async function upiHandler(request: FastifyRequest, reply: FastifyReply) {
     //   data: newTransaction,
     // });
 
-    const body = request.body as UpdateUpiRequestBody;
+    const body = request.body as UpiRouteRequestBody;
     const uniqId = await regexMatcher(body.text);
+
+    console.log(uniqId);
 
     // Find the existing transaction
     const existingTransaction = await UpiTransaction.findOne({ uniqId });

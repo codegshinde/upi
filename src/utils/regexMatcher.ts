@@ -1,14 +1,22 @@
-export async function regexMatcher(string: string) {
+export async function regexMatcher(text: string) {
   try {
     // Regular expression to match the amount in the format ₹1.35 or Rs.1.35
     const regex = /(?:₹|Rs\.)\d+\.\d+/;
-    const match = string.match(regex);
+    const match = text.match(regex);
+
     if (match) {
-      console.log("Amount:", match[0]); // Output the matched amount
+      // Extract the matched amount
+      const amountWithCurrency = match[0];
+
+      // Remove the currency symbol from the matched amount
+      const amount = amountWithCurrency.replace(/(?:₹|Rs\.)/, "");
+
+      // console.log("Amount:", amount);
+      return amount;
     } else {
       console.log("No match found.");
+      return null;
     }
-    return;
   } catch (error) {
     throw error;
   }
