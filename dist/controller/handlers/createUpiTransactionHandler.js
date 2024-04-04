@@ -30,8 +30,10 @@ const createUpiTransactionHandler = async (request, reply)=>{
             userId: mobile
         });
         await newUpiTransaction.save();
+        const upiPaymentLink = `upi://pay?pa=7666926399@paytm&pn=Recipient&am=${newUpiTransaction.uniqId}&cu=INR`;
         reply.send({
-            paymentDetails: newUpiTransaction
+            amount: newUpiTransaction.amount,
+            link: upiPaymentLink
         });
     } catch (error) {
         throw error;
