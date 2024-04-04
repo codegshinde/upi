@@ -2,15 +2,16 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-Object.defineProperty(exports, "updateUpiHandler", {
+Object.defineProperty(exports, "updateUpiTransactionRouteOptions", {
     enumerable: true,
     get: function() {
-        return updateUpiHandler;
+        return updateUpiTransactionRouteOptions;
     }
 });
 const _UpiTransaction = require("../../models/UpiTransaction");
 const _UpiTransactionReal = require("../../models/UpiTransactionReal");
 const _regexMatcher = require("../../utils/regexMatcher");
+const _updateUpiTransaction = require("../schemas/updateUpiTransaction");
 async function updateUpiHandler(request, reply) {
     try {
         const body = request.body;
@@ -39,3 +40,7 @@ async function updateUpiHandler(request, reply) {
         throw error;
     }
 }
+const updateUpiTransactionRouteOptions = {
+    schema: _updateUpiTransaction.updateUpiTransactionRouteSchema,
+    handler: updateUpiHandler
+};

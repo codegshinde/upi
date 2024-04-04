@@ -23,4 +23,4 @@ const transactionSchema = new _mongoose.Schema({
         required: true
     }
 });
-const Transaction = (0, _mongoose.model)("upitransactions", transactionSchema);
+const Transaction = (0, _mongoose.model)("transactions", transactionSchema);

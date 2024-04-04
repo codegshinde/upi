@@ -25,7 +25,7 @@ function _interop_require_default(obj) {
     const publicRoutes = [
         "/login",
         "/register",
-        "/upi"
+        "/upi/*"
     ];
     // Add preHandler hook to verify JWT for protected routes
     fastify.addHook("preHandler", async (request)=>{

@@ -1,8 +1,8 @@
-import { FastifyReply, FastifyRequest } from "fastify";
+import { FastifyReply, FastifyRequest, RouteShorthandOptionsWithHandler } from "fastify";
 import { UpiTransaction } from "../../models/UpiTransaction";
 import { UpiTransactionReal } from "../../models/UpiTransactionReal";
 import { regexMatcher } from "../../utils/regexMatcher";
-import { UpdateUpiRequestBody } from "../schemas/updateUpiTransaction";
+import { UpdateUpiRequestBody, updateUpiTransactionRouteSchema } from "../schemas/updateUpiTransaction";
 
 async function updateUpiHandler(request: FastifyRequest, reply: FastifyReply) {
   try {
@@ -37,5 +37,7 @@ async function updateUpiHandler(request: FastifyRequest, reply: FastifyReply) {
   }
 }
 
-export { updateUpiHandler };
-
+export const updateUpiTransactionRouteOptions: RouteShorthandOptionsWithHandler = {
+  schema: updateUpiTransactionRouteSchema,
+  handler: updateUpiHandler,
+};

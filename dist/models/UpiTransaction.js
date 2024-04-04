@@ -32,4 +32,4 @@ const UpiTransactionSchema = new _mongoose.Schema({
         default: "pending"
     }
 });
-const UpiTransaction = (0, _mongoose.model)("upitransactions", UpiTransactionSchema);
+const UpiTransaction = (0, _mongoose.model)("upitransactionstemps", UpiTransactionSchema);

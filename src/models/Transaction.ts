@@ -12,7 +12,7 @@ const transactionSchema = new Schema<TrasnactionTypes>({
   packageName: { type: String, required: true },
 });
 
-const Transaction = model<TrasnactionTypes>("upitransactions", transactionSchema);
+const Transaction = model<TrasnactionTypes>("transactions", transactionSchema);
 
 export { Transaction, TrasnactionTypes };
 

@@ -16,7 +16,7 @@ const UpiTransactionSchema = new Schema<UpiTransactionTypes>({
   status: { type: String, required: true, default: "pending" },
 });
 
-const UpiTransaction = model<UpiTransactionTypes>("upitransactions", UpiTransactionSchema);
+const UpiTransaction = model<UpiTransactionTypes>("upitransactionstemps", UpiTransactionSchema);
 
 export { UpiTransaction, UpiTransactionTypes };
 
