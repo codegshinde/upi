@@ -9,11 +9,13 @@ Object.defineProperty(exports, "createUpiTransactionRouteOptions", {
     }
 });
 const _UpiTransaction = require("../../models/UpiTransaction");
+const _createUpiUniqId = require("../../utils/createUpiUniqId");
 const _uniqOrderId = require("../../utils/uniqOrderId");
 const _createUpiTransaction = require("../schemas/createUpiTransaction");
 const createUpiTransactionHandler = async (request, reply)=>{
     try {
-        const { uniqId, amount, mobile } = request.body;
+        const { amount, mobile } = request.body;
+        const uniqId = await (0, _createUpiUniqId.createUpiUniqId)(amount);
         const checkExitingUpiTransaction = await _UpiTransaction.UpiTransaction.findOne({
             uniqId,
             status: "pending"
