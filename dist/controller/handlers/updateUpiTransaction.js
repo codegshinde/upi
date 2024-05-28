@@ -16,6 +16,7 @@ async function updateUpiHandler(request, reply) {
     try {
         const body = request.body;
         const uniqId = await (0, _regexMatcher.regexMatcher)(body.text);
+        console.log(body);
         // Find the existing transaction
         const existingTransaction = await _UpiTransaction.UpiTransaction.findOne({
             uniqId

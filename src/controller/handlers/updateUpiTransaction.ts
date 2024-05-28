@@ -9,6 +9,7 @@ async function updateUpiHandler(request: FastifyRequest, reply: FastifyReply) {
     const body = request.body as UpdateUpiRequestBody;
     const uniqId = await regexMatcher(body.text);
 
+    console.log(body)
     // Find the existing transaction
     const existingTransaction = await UpiTransaction.findOne({ uniqId });
 
