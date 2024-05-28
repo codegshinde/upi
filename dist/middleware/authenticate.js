@@ -24,18 +24,15 @@ function _interop_require_default(obj) {
     // Define public routes that do not require authentication
     const publicRoutes = [
         "/login",
-        "/register",
-        "/upi",
-        "/upi/create",
-        "/upi/update"
+        "/register"
     ];
     // Add preHandler hook to verify JWT for protected routes
     fastify.addHook("preHandler", async (request)=>{
         try {
             // Extract the authorization header
             const authHeader = request.headers.authorization;
-            // Skip authentication for public routes
-            if (publicRoutes.includes(request.routeOptions.url)) {
+            // Skip authentication for public routes and URLs under /upi/
+            if (publicRoutes.includes(request.url) || request.url.startsWith("/upi/")) {
                 return;
             }
             // Throw an error if auth headers are not provided

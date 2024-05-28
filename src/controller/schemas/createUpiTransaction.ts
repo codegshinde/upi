@@ -2,8 +2,8 @@ import { Static, Type } from "@sinclair/typebox";
 
 // Define the options object schema with optional properties
 const options = Type.Object({
+  merchantId: Type.String(),
   amount: Type.Number(),
-  uniqId: Type.Optional(Type.String()),
   mobile: Type.String(),
 });
 

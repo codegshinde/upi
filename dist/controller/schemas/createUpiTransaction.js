@@ -11,8 +11,8 @@ Object.defineProperty(exports, "createUpiTransactionRouteSchema", {
 const _typebox = require("@sinclair/typebox");
 // Define the options object schema with optional properties
 const options = _typebox.Type.Object({
+    merchantId: _typebox.Type.String(),
     amount: _typebox.Type.Number(),
-    uniqId: _typebox.Type.Optional(_typebox.Type.String()),
     mobile: _typebox.Type.String()
 });
 const createUpiTransactionRouteSchema = {
