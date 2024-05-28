@@ -10,6 +10,9 @@ Object.defineProperty(exports, "UpiTransaction", {
 });
 const _mongoose = require("mongoose");
 const UpiTransactionSchema = new _mongoose.Schema({
+    _id: {
+        type: _mongoose.Schema.Types.ObjectId
+    },
     amount: {
         type: Number,
         required: true

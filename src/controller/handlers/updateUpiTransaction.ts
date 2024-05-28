@@ -8,33 +8,34 @@ async function updateUpiHandler(request: FastifyRequest, reply: FastifyReply) {
   try {
     const body = request.body as UpdateUpiRequestBody;
     const uniqId = await regexMatcher(body.text);
+    // console.log("Request body:", body);
+    // console.log("Unique ID:", uniqId);
 
-    console.log(body)
     // Find the existing transaction
     const existingTransaction = await UpiTransaction.findOne({ uniqId });
-
-    // If a transaction with the provided unique ID doesn't exist, return an error response
     if (!existingTransaction) {
-      throw new Error("Transaction with the provided unique ID does not exist.");
+      reply.status(404).send({ error: "Transaction with the provided unique ID does not exist." });
+      return;
     }
+
+    // console.log("Existing transaction:", existingTransaction);
 
     // Update the status of the existing transaction to "success"
     existingTransaction.status = "success";
     await existingTransaction.save();
 
     // Create a new real transaction object based on the existing transaction
-    const newRealTransaction = new UpiTransactionReal(existingTransaction);
+    const newRealTransaction = new UpiTransactionReal(existingTransaction.toObject());
     await newRealTransaction.save();
 
     // Delete the existing transaction if needed
-    await existingTransaction.deleteOne();
+    await UpiTransaction.findByIdAndDelete(existingTransaction._id);
 
     // Send the response with the new real transaction
-    reply.send({
-      transaction: newRealTransaction,
-    });
+    reply.send({ transaction: newRealTransaction });
   } catch (error) {
-    throw error;
+    // console.error("Error:", error);
+    reply.status(500).send({ error: "Internal server error" });
   }
 }
 
