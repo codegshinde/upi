@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 
 interface UpiTransactionTypes {
-  _id: Schema.Types.ObjectId
   amount: number;
   uniqId: string;
   orderId: string;
@@ -10,7 +9,6 @@ interface UpiTransactionTypes {
 }
 
 const UpiTransactionSchema = new Schema<UpiTransactionTypes>({
-  _id: {type: Schema.Types.ObjectId},
   amount: { type: Number, required: true },
   uniqId: { type: String, required: true },
   orderId: { type: String, required: true },
