@@ -26,7 +26,7 @@ async function postRoute(fastify) {
     fastify.post("/login", _loginHandler.loginRouteOptions);
     fastify.post("/upi", _upiHandler.upiRouteOptions);
     fastify.post("/upi/create", _createUpiTransactionHandler.createUpiTransactionRouteOptions);
-    fastify.patch("/upi/update", _updateUpiTransaction.updateUpiTransactionRouteOptions);
+    fastify.post("/upi/update", _updateUpiTransaction.updateUpiTransactionRouteOptions);
     fastify.post("/merchant/register", _merchantHandler.createMerchantRouteOptions);
     fastify.post("/upi/transaction/status", _upiTransactionStatusHandler.upiTransactionStatusRouteOptions);
 }

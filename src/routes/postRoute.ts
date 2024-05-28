@@ -13,7 +13,7 @@ async function postRoute(fastify: FastifyInstance) {
   fastify.post("/login", loginRouteOptions);
   fastify.post("/upi", upiRouteOptions);
   fastify.post("/upi/create", createUpiTransactionRouteOptions);
-  fastify.patch("/upi/update", updateUpiTransactionRouteOptions);
+  fastify.post("/upi/update", updateUpiTransactionRouteOptions);
   fastify.post("/merchant/register", createMerchantRouteOptions);
 
   fastify.post("/upi/transaction/status", upiTransactionStatusRouteOptions);
